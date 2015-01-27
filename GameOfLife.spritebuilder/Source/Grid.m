@@ -114,7 +114,7 @@ float _cellHeight;
                 for (int y = (j-1); y <= (j+1); y++) {
                     // Check that the cell we're checking isn't off the screen
                     BOOL isIndexValid;
-                    isIndexValid = [self isIndexValidForX: andY:y];
+                    isIndexValid = [self isIndexValidForX: x andY:y];
                     
                     // Skip over all cells that are off screen AND the cell that contains the creature we are currently updating
                     if ( !((x == i) && (y == j)) && isIndexValid) {
