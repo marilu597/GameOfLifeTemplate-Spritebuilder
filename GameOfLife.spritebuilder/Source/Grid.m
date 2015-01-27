@@ -55,13 +55,32 @@ float _cellHeight;
             _gridArray[i][j] = creature;
             
             // Make creatures visible to test this method, remove this once we know we have filled the grid properly
-            creature.isAlive = YES;
+            //creature.isAlive = YES;
             
             x += _cellWidth;
         }
         
         y += _cellHeight;
     }
+}
+
+- (void) touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
+    // Get the x, y coordinates fo the touch
+    CGPoint touchLocation = [touch locationInNode:self];
+    
+    // Get the Creature at that location
+    Creature *creature = [self creatureForTouchPosition:touchLocation];
+    
+    // Invert it's state - kill it if it's alive, bring it to life if it's dead
+    creature.isAlive = !creature.isAlive;
+}
+
+-(Creature *) creatureForTouchPosition:(CGPoint)touchPosition {
+    // Get the row and column that was touched, return the Creature inside the corresponding cell
+    int row = touchPosition.y / _cellHeight;
+    int column = touchPosition.x / _cellWidth;
+    
+    return _gridArray[row][column];
 }
 
 @end
