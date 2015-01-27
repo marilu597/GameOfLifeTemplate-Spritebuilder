@@ -138,6 +138,9 @@ float _cellHeight;
 }
 
 -(void) updateCreatures {
+    
+    int numAlive = 0;
+    
     for (int i = 0; i < [_gridArray count]; i++) {
         for (int j = 0; j < [_gridArray[i] count]; j++) {
             Creature * currentCreature = _gridArray[i][j];
@@ -149,8 +152,14 @@ float _cellHeight;
             } else if (neighbors <= 1 || neighbors >= 4) {
                 currentCreature.isAlive = NO;
             }
+            
+            if (currentCreature.isAlive) {
+                numAlive += 1;
+            }
         }
     }
+    
+    _totalAlive = numAlive;
 }
 
 @end
